@@ -2,6 +2,8 @@
 
 Provides a Go client for smee.io
 
+Mimics the interface provided by https://github.com/probot/smee
+
 Based on previous work by [@cryptix](https://github.com/cryptix/goSSEClient)
 
 ## Usage
