@@ -9,14 +9,21 @@ import (
 	"os"
 )
 
-// CreateChannel creates channel on smee.io.
+// CreateChannel creates a new channel on smee.io.
 func CreateChannel() (*string, error) {
+	loc, err := CreateChannelFromURL("https://smee.io/new")
+
+	return loc, err
+}
+
+// CreateChannelFromURL creates a new channel on a specific server.
+func CreateChannelFromURL(newURL string) (*string, error) {
 	httpClient := http.Client{
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
 			return http.ErrUseLastResponse
 		},
 	}
-	resp, err := httpClient.Head("https://smee.io/new")
+	resp, err := httpClient.Head(newURL)
 	if err != nil {
 		return nil, err
 	}

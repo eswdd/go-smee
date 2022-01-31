@@ -20,6 +20,13 @@ Optionally create a new smee.io channel:
 source, err := smee.CreateSmeeChannel()
 ```
 
+Or you can use your own [SMEE
+server](https://github.com/probot/smee.io#deploying-your-own-smeeio):
+
+```go
+source, err := smee.CreateSmeeChannelFromURL("http://localhost:3000/new")
+```
+
 Setup a new client:
 
 ```go
