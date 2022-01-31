@@ -1,27 +1,37 @@
 # go-smee
 
-Provides a Go client for smee.io
+Provides a Go client for [smee.io](https://smee.io).
 
-Mimics the interface provided by https://github.com/probot/smee
+Mimics the interface provided by <https://github.com/probot/smee>.
 
-Based on previous work by [@cryptix](https://github.com/cryptix/goSSEClient)
+Based on previous work by [@cryptix](https://github.com/cryptix/goSSEClient).
 
 ## Usage
 
 Import:
-```
-import "github.com/eswdd/go-smee"
+
+```go
+import "github.com/eswdd/go-smee/smee"
 ```
 
-Optionally create a new smee.io channel
+Optionally create a new smee.io channel:
+
+```go
+source, err := smee.CreateSmeeChannel()
 ```
-source, err = CreateSmeeChannel()
+
+Or you can use your own [SMEE
+server](https://github.com/probot/smee.io#deploying-your-own-smeeio):
+
+```go
+source, err := smee.CreateSmeeChannelFromURL("http://localhost:3000/new")
 ```
 
 Setup a new client:
-```
-target := make(chan SSEvent)
-client := NewSmeeClient(source, target)
+
+```go
+target := make(chan smee.SSEvent)
+client := smee.NewSmeeClient(source, target)
 
 sub, err := client.Start()
 if err != nil {
@@ -34,5 +44,5 @@ for ev := range target {
 }
 ```
 
-Experience suggests that if subscribing to Github hooks, you'll want to ignore any with `Name` set.
-
+Experience suggests that if subscribing to Github hooks, you'll want to ignore
+any with `Name` set.
